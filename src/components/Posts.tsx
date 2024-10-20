@@ -29,17 +29,19 @@ const Posts: React.FC = () => {
         }
     })
 
-    if (isLoading || isSaving) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
 
     return (
         <>
         <AddPost isSaving={isLoading || isSaving} onUpdate={addNewPost} />
+        {(isLoading || isSaving) ? <div>Loading...</div>
+        :
         <ul>
             {data?.map(post => (
                 <li key={post.id}>{post.title}</li>
             ))}
         </ul>
+        }
         </>
     );
 }
